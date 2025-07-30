@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import { LogIn, Eye, EyeOff, Stethoscope } from 'lucide-react'
+import { LogIn, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 
 export default function LoginPage() {
@@ -141,7 +141,7 @@ export default function LoginPage() {
             <div className="space-y-4">
               <div className="text-center">
                 <p className="text-sm text-gray-400">
-                  Don't have an account?{' '}
+                  Don&apos;t have an account?{' '}
                   <Link href="/register" className="font-medium text-purple-400 hover:text-purple-300 transition-colors">
                     Register here
                   </Link>

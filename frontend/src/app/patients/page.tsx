@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { usePatients } from '@/contexts/PatientContext'
+import { Patient } from '@/services/patient.service'
 import { Search, Plus, Edit2, Trash2, Phone, Mail, Calendar, User } from 'lucide-react'
 
 interface FormData {
@@ -107,7 +108,7 @@ export default function PatientsPage() {
     }
   }
 
-  const openEditModal = (patient: any) => {
+  const openEditModal = (patient: Patient) => {
     setEditingPatient(patient)
     setFormData({
       firstName: patient.firstName,
@@ -115,7 +116,7 @@ export default function PatientsPage() {
       email: patient.email,
       phone: patient.phone,
       dateOfBirth: patient.dateOfBirth ? patient.dateOfBirth.split('T')[0] : '',
-      gender: patient.gender || '',
+      gender: '',
       address: patient.address || '',
       emergencyContact: patient.emergencyContact || '',
       medicalHistory: patient.medicalHistory || ''

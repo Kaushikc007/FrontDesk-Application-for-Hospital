@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Calendar, Plus, Edit, Trash2, Clock } from 'lucide-react'
 import { format } from 'date-fns'
 import { appointmentService, Appointment } from '@/services/appointment.service'
@@ -26,7 +26,7 @@ export default function AppointmentsPage() {
   const [editingAppointment, setEditingAppointment] = useState<Appointment | null>(null)
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0])
   const [doctors, setDoctors] = useState<Doctor[]>([])
-  const { patients } = usePatients()
+  const {} = usePatients() // PatientSelector component uses this context
   const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     patientId: '',
@@ -40,12 +40,7 @@ export default function AppointmentsPage() {
   })
 
   // Load appointments and related data
-  useEffect(() => {
-    loadAppointments()
-    loadDoctors()
-  }, [selectedDate])
-
-  const loadAppointments = async () => {
+  const loadAppointments = useCallback(async () => {
     try {
       setLoading(true)
       const appointmentsData = await appointmentService.getAppointments({
@@ -59,7 +54,12 @@ export default function AppointmentsPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [selectedDate])
+
+  useEffect(() => {
+    loadAppointments()
+    loadDoctors()
+  }, [loadAppointments])
 
   const loadDoctors = async () => {
     try {
@@ -85,7 +85,7 @@ export default function AppointmentsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const appointment = await appointmentService.createAppointment({
+      const newAppointment = await appointmentService.createAppointment({
         patientId: parseInt(formData.patientId),
         doctorId: parseInt(formData.doctorId),
         appointmentDate: formData.appointmentDate,
@@ -94,6 +94,9 @@ export default function AppointmentsPage() {
         reasonForVisit: formData.reasonForVisit,
         notes: formData.notes
       })
+
+      // Add the new appointment to the list
+      setAppointments(prev => [...prev, newAppointment])
 
       // If checked, also add patient to queue
       if (formData.addToQueue) {
@@ -105,7 +108,6 @@ export default function AppointmentsPage() {
 
       setShowAddModal(false)
       resetForm()
-      loadAppointments()
     } catch (error) {
       console.error('Failed to create appointment:', error)
       setError('Failed to create appointment')
@@ -130,13 +132,8 @@ export default function AppointmentsPage() {
     setShowEditModal(true)
   }
 
-  const handleEditSubmit = (updatedAppointment: Appointment) => {
-    setAppointments(appointments.map(apt => 
-      apt.id === updatedAppointment.id ? updatedAppointment : apt
-    ))
-    setShowEditModal(false)
-    setEditingAppointment(null)
-  }
+  // Note: handleEditSubmit function was removed as it's not currently used
+  // Add back when edit functionality is implemented
 
   const filteredAppointments = appointments.filter(apt => apt.appointmentDate === selectedDate)
 

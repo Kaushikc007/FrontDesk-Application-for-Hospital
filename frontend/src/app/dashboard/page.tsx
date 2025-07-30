@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Users, Calendar, Clock, UserCheck, Stethoscope, CheckCircle, AlertCircle } from 'lucide-react'
+import { Users, Calendar, Clock, UserCheck, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
-import { appointmentService } from '@/services/appointment.service'
-import { doctorService } from '@/services/doctor.service'
-import { patientService } from '@/services/patient.service'
+import { appointmentService, Appointment } from '@/services/appointment.service'
+import { doctorService, Doctor } from '@/services/doctor.service'
+import { patientService, Patient } from '@/services/patient.service'
 
 interface DashboardStats {
   totalPatientsToday: number
@@ -59,9 +59,9 @@ export default function Dashboard() {
       ])
 
       // Calculate stats from real data
-      const activeDoctors = allDoctors.filter((doctor: any) => doctor.status === 'active').length
-      const completedAppointments = todayAppointments.filter((apt: any) => apt.status === 'completed').length
-      const pendingAppointments = todayAppointments.filter((apt: any) => apt.status === 'scheduled').length
+      const activeDoctors = allDoctors.filter((doctor: Doctor) => doctor.status === 'active').length
+      const completedAppointments = todayAppointments.filter((apt: Appointment) => apt.status === 'completed').length
+      const pendingAppointments = todayAppointments.filter((apt: Appointment) => apt.status === 'scheduled').length
 
       setStats({
         totalPatientsToday: allPatients.length,
@@ -75,7 +75,7 @@ export default function Dashboard() {
       // Create recent activity from real appointments
       const recentActivities: RecentActivity[] = todayAppointments
         .slice(0, 5)
-        .map((appointment: any, index: number) => ({
+        .map((appointment: Appointment, index: number) => ({
           id: appointment.id,
           type: appointment.status === 'completed' ? 'completion' : 'appointment',
           message: `${appointment.status === 'completed' ? 'Completed' : 'Scheduled'} appointment: ${appointment.patient?.firstName} ${appointment.patient?.lastName} with ${appointment.doctor?.firstName} ${appointment.doctor?.lastName}`,

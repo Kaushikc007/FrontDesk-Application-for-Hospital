@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Eye, EyeOff, UserPlus, User, Mail, IdCard, Users } from 'lucide-react'
 import Link from 'next/link'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'
 import * as Yup from 'yup'
 
 // Validation Schema
@@ -57,7 +57,7 @@ export default function RegisterPage() {
     confirmPassword: ''
   }
 
-  const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
+  const handleSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
     setError('')
     setSuccess('')
 
