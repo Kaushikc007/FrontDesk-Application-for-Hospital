@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
-import { X, User, Mail, IdCard, CheckCircle, LogOut } from 'lucide-react'
+import { X, User, Mail, CheckCircle, LogOut } from 'lucide-react'
 
 interface ProfileModalProps {
   isOpen: boolean

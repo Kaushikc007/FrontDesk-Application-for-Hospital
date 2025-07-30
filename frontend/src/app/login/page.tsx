@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { useAuth } from '@/contexts/AuthContext'
 import { LogIn, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
@@ -38,9 +39,11 @@ export default function LoginPage() {
         {/* Logo and Header */}
         <div className="text-center">
           <div className="mx-auto w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-xl border border-gray-700">
-            <img 
+            <Image 
               src="/allo-health-logo.svg" 
               alt="Allo Health" 
+              width={48}
+              height={48}
               className="w-12 h-12"
             />
           </div>

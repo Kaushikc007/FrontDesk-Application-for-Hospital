@@ -129,12 +129,6 @@ export default function QueuePage() {
     await updateStatus(id, 'completed')
   }
 
-  const markCancelled = async (id: number) => {
-    if (window.confirm('Are you sure you want to cancel this patient?')) {
-      await updateStatus(id, 'cancelled')
-    }
-  }
-
   const resetQueue = () => {
     if (window.confirm('Are you sure you want to reset the entire queue? This will remove all completed and cancelled entries.')) {
       // Filter out completed and cancelled entries

@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import { Users, Calendar, Clock, UserCheck, LogOut, User, Stethoscope, LayoutDashboard, Menu, X } from 'lucide-react'
+import { Users, Calendar, Clock, LogOut, User, Stethoscope, LayoutDashboard, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import ProfileModal from './ProfileModal'
 
@@ -36,9 +37,11 @@ export default function Navigation() {
             <div className="flex items-center flex-shrink-0 min-w-0 mr-8">
               <div className="flex-shrink-0 flex items-center">
                 <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-4">
-                  <img 
+                  <Image 
                     src="/allo-health-logo.svg" 
                     alt="Allo Health" 
+                    width={32}
+                    height={32}
                     className="w-8 h-8"
                     onError={(e) => {
                       console.log('Logo failed to load:', e);

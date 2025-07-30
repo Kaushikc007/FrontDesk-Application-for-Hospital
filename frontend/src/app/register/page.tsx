@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { Eye, EyeOff, UserPlus, User, Mail, IdCard, Users } from 'lucide-react'
 import Link from 'next/link'
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'
@@ -103,9 +104,11 @@ export default function RegisterPage() {
         {/* Logo and Header */}
         <div className="text-center">
           <div className="mx-auto w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-xl border border-gray-700">
-            <img 
+            <Image 
               src="/allo-health-logo.svg" 
               alt="Allo Health" 
+              width={48}
+              height={48}
               className="w-12 h-12"
             />
           </div>
@@ -128,7 +131,7 @@ export default function RegisterPage() {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ isSubmitting, values }) => (
+            {({ isSubmitting }) => (
               <Form className="space-y-6">
                 {error && (
                   <div className="bg-red-900/50 border border-red-700 text-red-300 px-4 py-3 rounded-lg">
