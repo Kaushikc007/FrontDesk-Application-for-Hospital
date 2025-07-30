@@ -1,0 +1,44 @@
+# Development and IDE files
+.vscode/
+.github/
+*.log
+.DS_Store
+
+# Debug and test files
+debug_api.js
+*.debug.js
+test.js
+
+# Documentation that's not for production
+PATIENT_SELECTOR_GUIDE.md
+**/development-docs/
+
+# Duplicate/old versions
+new version/
+old/
+backup/
+
+# Environment files (use .env.example instead)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Node modules (should be in subproject .gitignore but just in case)
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+out/
