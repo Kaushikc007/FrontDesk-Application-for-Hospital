@@ -42,9 +42,7 @@ export default function DoctorsPage() {
 
   const loadDoctors = async () => {
     try {
-      console.log('Loading doctors from API...')
       const doctorsData = await doctorService.getDoctors()
-      console.log('Successfully loaded doctors:', doctorsData.length)
       setDoctors(doctorsData)
       setError('') // Clear any previous errors
     } catch (error) {
@@ -57,8 +55,6 @@ export default function DoctorsPage() {
   }
 
   const updateDoctorStatus = (id: number, newStatus: 'active' | 'on_leave' | 'break' | 'inactive') => {
-    console.log(`updateDoctorStatus called with id=${id}, newStatus=${newStatus}`)
-    
     try {
       // Find the doctor being updated
       const doctorToUpdate = doctors.find(d => d.id === id)
@@ -66,8 +62,6 @@ export default function DoctorsPage() {
         console.error(`Doctor with id ${id} not found`)
         return
       }
-      
-      console.log(`Current doctor status: ${doctorToUpdate.status}, updating to: ${newStatus}`)
       
       // Update local state immediately for better UX
       setDoctors(prevDoctors => {
@@ -78,7 +72,6 @@ export default function DoctorsPage() {
             isActive: newStatus === 'active' 
           } : doctor
         )
-        console.log(`Updated doctors array, doctor ${id} now has status: ${updated.find(d => d.id === id)?.status}`)
         return updated
       })
 
@@ -92,7 +85,6 @@ export default function DoctorsPage() {
       // TODO: Add API call when backend is ready
       // await doctorService.updateStatus(id, newStatus)
       
-      console.log(`Successfully updated doctor ${id} status to ${newStatus}`)
     } catch (error) {
       console.error('Failed to update doctor status:', error)
       setError('Failed to update doctor status')

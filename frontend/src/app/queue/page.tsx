@@ -6,23 +6,9 @@ import { queueService, QueueEntry } from '@/services/queue.service'
 import { usePatients } from '@/contexts/PatientContext'
 import PatientSelector from '@/components/PatientSelector'
 
-const statusColors = {
-  waiting: 'bg-yellow-100 text-yellow-800',
-  with_doctor: 'bg-blue-100 text-blue-800',
-  completed: 'bg-green-100 text-green-800',
-  cancelled: 'bg-red-100 text-red-800',
-}
-
-const priorityColors = {
-  low: 'bg-gray-100 text-gray-800',
-  normal: 'bg-blue-100 text-blue-800',
-  high: 'bg-orange-100 text-orange-800',
-  urgent: 'bg-red-100 text-red-800',
-}
-
 export default function QueuePage() {
   const [queue, setQueue] = useState<QueueEntry[]>([])
-  const { patients } = usePatients()
+  const {} = usePatients() // PatientSelector component uses this context
   const [loading, setLoading] = useState(true)
   const [showAddModal, setShowAddModal] = useState(false)
   const [selectedPatient, setSelectedPatient] = useState<number | null>(null)

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Users, Calendar, Clock, UserCheck } from 'lucide-react'
 
 export default function Home() {
@@ -10,9 +11,11 @@ export default function Home() {
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center mr-4">
                 <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                  <img 
+                  <Image 
                     src="/allo-health-logo.svg" 
                     alt="Allo Health" 
+                    width={40}
+                    height={40}
                     className="w-10 h-10"
                   />
                 </div>

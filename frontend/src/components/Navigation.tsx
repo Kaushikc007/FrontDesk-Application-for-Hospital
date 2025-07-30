@@ -44,11 +44,10 @@ export default function Navigation() {
                     height={32}
                     className="w-8 h-8"
                     onError={(e) => {
-                      console.log('Logo failed to load:', e);
                       (e.target as HTMLImageElement).style.display = 'none';
                     }}
                     onLoad={() => {
-                      console.log('Logo loaded successfully');
+                      // Logo loaded successfully
                     }}
                   />
                 </div>

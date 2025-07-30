@@ -5,7 +5,7 @@ import { Users, Calendar, Clock, UserCheck, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 import { appointmentService, Appointment } from '@/services/appointment.service'
 import { doctorService, Doctor } from '@/services/doctor.service'
-import { patientService, Patient } from '@/services/patient.service'
+import { patientService } from '@/services/patient.service'
 
 interface DashboardStats {
   totalPatientsToday: number

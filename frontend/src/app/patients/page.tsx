@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { usePatients } from '@/contexts/PatientContext'
 import { Patient } from '@/services/patient.service'
 import { Search, Plus, Edit2, Trash2, Phone, Mail, Calendar, User } from 'lucide-react'
@@ -22,7 +22,7 @@ export default function PatientsPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [showAddModal, setShowAddModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
-  const [editingPatient, setEditingPatient] = useState<any>(null)
+  const [editingPatient, setEditingPatient] = useState<Patient | null>(null)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [formData, setFormData] = useState<FormData>({
